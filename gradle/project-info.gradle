@@ -1,0 +1,25 @@
+// -----------------------------------------------------------------------------
+// publishing information
+// -----------------------------------------------------------------------------
+ext.publishing.artifactId =  project.name.toLowerCase()
+ext.publishing.groupId    =  'eu.mihosoft.tcc.tccdist'
+ext.publishing.versionId  =  '2018.1.0'
+
+ext.publishing.developerName         = 'Michael Hoffer'
+ext.publishing.developerAlias        = 'miho'
+ext.publishing.developerEmail        = 'info@michaelhoffer.de'
+ext.publishing.inceptionYear         = '2018'
+
+ext.publishing.bintray.repo          = 'TCC'
+ext.publishing.bintray.userOrg       = 'miho'
+ext.publishing.bintray.name          = project.name
+
+ext.publishing.desc                  = 'Precompiled TCC distribution for Java projects and VMF/VRL plugins'
+ext.publishing.license               = 'LGPL-3.0'
+ext.publishing.licenseUrl            = 'https://github.com/miho/tcc-dist/blob/master/LICENSE'
+ext.publishing.labels                = ['C', 'TCC', 'C99', 'java', 'vmf', 'vmf-text', 'vrl']
+ext.publishing.websiteUrl            = 'https://github.com/miho/tcc-dist'
+ext.publishing.issueTrackerUrl       = 'https://github.com/miho/tcc-dist/issues'
+ext.publishing.vcsUrl                = 'git@github.com:miho/tcc-dist.git'
+
+ext.publishing.pomName               =  ext.publishing.artifactId

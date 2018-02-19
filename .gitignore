@@ -1,0 +1,15 @@
+/.nb-gradle/
+.idea/
+tcc-dist.iml
+/build/
+/.gradle/
+out
+
+# native code
+/src/main/resources/eu/mihosoft/vtcc/tccdist/linux/
+/src/main/resources/eu/mihosoft/vtcc/tccdist/osx/
+/src/main/resources/eu/mihosoft/vtcc/tccdist/windows/
+
+# build info
+/src/main/java/eu/mihosoft/vtcc/tccdist/BuildInfo.java
+

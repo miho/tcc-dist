@@ -1,0 +1,62 @@
+plugins {
+    //    id 'com.github.hierynomus.license' version '0.13.1'
+    id 'maven-publish'
+    id 'net.nemerosa.versioning' version '2.4.0'
+    id 'com.jfrog.bintray' version '1.7.2'
+    id 'com.github.ben-manes.versions' version '0.13.0'
+}
+
+apply plugin: 'java'
+apply from: 'gradle/publishing.gradle'
+
+sourceCompatibility = '1.8'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
+    gradleVersion = '4.5.1'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.10'
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+}
+
+// write build info to build.properties in resource folder
+task writeBuildInfo() {
+
+    new File(project.rootDir,
+            "src/main/resources/eu/mihosoft/vtcc/tccdist/linux/x86").mkdirs()
+    new File(project.rootDir,
+            "src/main/resources/eu/mihosoft/vtcc/tccdist/linux/x64").mkdirs()
+    new File(project.rootDir,
+            "src/main/resources/eu/mihosoft/vtcc/tccdist/windows/x86").mkdirs()
+    new File(project.rootDir,
+            "src/main/resources/eu/mihosoft/vtcc/tccdist/windows/x64").mkdirs()
+    new File(project.rootDir,
+            "src/main/resources/eu/mihosoft/vtcc/tccdist/osx/").mkdirs()
+
+    def buildInfoCode = new File(project.rootDir,
+     "src/main/java/eu/mihosoft/vtcc/tccdist/BuildInfo.java")
+    buildInfoCode.getParentFile().mkdirs()
+    buildInfoCode.write("package eu.mihosoft.vtcc.tccdist;\n"
+        +"public class BuildInfo {\n"
+        +"  public static final String VERSION   = \"${project.version}\";\n"
+        +"  public static final String TIMESTAMP = \"${project.buildTimestamp}\";\n"
+        +"  public static final String DATE      = \"${project.buildDate}\";\n"
+        +"  public static final String TIME      = \"${project.buildTime}\";\n"
+        +"  public static final String REV       = \"${versioning.info.commit}\";\n"
+        +"}\n"
+    )
+}
+compileJava {
+    dependsOn writeBuildInfo
+}
+
